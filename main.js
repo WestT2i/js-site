@@ -18,7 +18,6 @@ button.addEventListener("click", function () {
   if (login.value == '1' && password.value == '1') {
     panelLogin.remove();
     showItem();
-    products();
     exit()
   } else {
     login.value = "";
@@ -26,30 +25,6 @@ button.addEventListener("click", function () {
     alert('Ошибка входа')
   }
 })
-
-//после авторизации выводит кнопку добавить товар
-
-function exit() {
-  const exitBtn = document.createElement("button");
-  exitBtn.type = "button";
-  exitBtn.classList.add("exit");
-  exitBtn.textContent = "Выход";
-  exitBtn.addEventListener('click', () => {
-    location.reload()
-  })
-  product.before(exitBtn);
-}
-
-function products() {
-  const productBtn = document.createElement("button");
-  productBtn.type = "button";
-  productBtn.classList.add("add-product-button");
-  productBtn.textContent = "Добавить товар";
-  productBtn.addEventListener('click', () => {
-    openPopup();
-  })
-  product.before(productBtn);
-}
 
 //активация попапа
 
@@ -99,11 +74,35 @@ function showItem() {
   productHeader.classList.add("product-header");
   product.appendChild(productHeader);
 
+//список товаров
+
   const productTitle = document.createElement("h1");
   productTitle.classList.add("product-title");
   productTitle.type = "text";
   productTitle.textContent = 'Список товаров';
   productHeader.appendChild(productTitle);
+
+//кнопка добавить товар
+
+  const productBtn = document.createElement("button");
+  productBtn.type = "button";
+  productBtn.classList.add("add-product-button");
+  productBtn.textContent = "Добавить товар";
+  productBtn.addEventListener('click', () => {
+    openPopup();
+  })
+  productHeader.appendChild(productBtn);
+
+//кнопка выход
+
+  const exitBtn = document.createElement("button");
+  exitBtn.type = "button";
+  exitBtn.classList.add("exit");
+  exitBtn.textContent = "Выход";
+  exitBtn.addEventListener('click', () => {
+    location.reload()
+  })
+  productHeader.appendChild(exitBtn);
   
   productLocal.forEach((item, index) => {
     const productId = document.createElement("div");
