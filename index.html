@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Task List</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <form class="panel-login">
+            <input type="text" id="login-input" class="login-input" placeholder="Логин">
+            <input type="password" id="password-input" class="password-input" placeholder="Пароль">
+            <button type="button" id="login-btn" class="login-button">Войти</button>
+        </form>
+
+        <div id="product" class="product-items"></div>
+
+        <div class="popup-bg">
+            <form class="popup">
+                <button type="button" class="close-popup">X</button>
+                <input type="text" id="productName" class="productName" placeholder="Название товара">
+                <input type="number" id="productPrice" class="productPrice" placeholder="Цена товара">
+                <button type="button" id="product-add" class="product-add">Добавить</button>
+            </form>
+        </div>
+
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
