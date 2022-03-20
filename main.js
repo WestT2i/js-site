@@ -95,11 +95,15 @@ function showItem() {
 
   product.replaceChildren();
 
+  const productHeader = document.createElement("div");
+  productHeader.classList.add("product-header");
+  product.appendChild(productHeader);
+
   const productTitle = document.createElement("h1");
   productTitle.classList.add("product-title");
   productTitle.type = "text";
   productTitle.textContent = 'Список товаров';
-  product.appendChild(productTitle);
+  productHeader.appendChild(productTitle);
   
   productLocal.forEach((item, index) => {
     const productId = document.createElement("div");
