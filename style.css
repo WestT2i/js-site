@@ -21,6 +21,10 @@ button {
     background: none;
 }
 
+.container {
+    height: 100vh;
+}
+
 .site-header {
     background: #009688;
     padding: 0 20px;
@@ -28,6 +32,36 @@ button {
     width: 100%;
     height: 60px;
     align-items: center;
+}
+
+.menu {
+    display: flex;
+}
+
+.menu-item {
+    margin-right: 30px;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.exit {
+    height: 40px;
+    background: #000;
+    color: #fff;
+    width: 100px;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-left: auto;
+}
+
+.exit:hover {
+    background: #303030;
+    color: #fff;
 }
 
 .popup-bg {
@@ -76,22 +110,6 @@ button {
     height: 40px;
     padding: 0px 10px;
     background: #e7e7e7;
-}
-
-.exit {
-    height: 40px;
-    background: #000;
-    color: #fff;
-    width: 100px;
-    padding: 10px;
-    cursor: pointer;
-    transition: 0.2s;
-    margin-left: 20px;
-}
-
-.exit:hover {
-    background: #303030;
-    color: #fff;
 }
 
 .product-add {

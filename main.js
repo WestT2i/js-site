@@ -1,14 +1,17 @@
+///логин
+const panelLogin = document.querySelector(".panel-login");
 const login = document.getElementById("login-input");
 const password = document.getElementById("password-input");
 const button = document.getElementById("login-btn");
+//конент
 const product = document.getElementById("product");
+//popup
 const popupBg = document.querySelector(".popup-bg");
 const popup = document.querySelector(".popup");
 const popupClose = document.querySelector(".close-popup");
 const productName = document.getElementById("productName");
 const productPrice = document.getElementById("productPrice");
 const productAdd = document.getElementById("product-add");
-const panelLogin = document.querySelector(".panel-login");
 
 let productLocal = [];
 
@@ -18,13 +21,48 @@ button.addEventListener("click", function () {
   if (login.value == '1' && password.value == '1') {
     panelLogin.remove();
     showItem();
-    exit()
+    headerCreate();
   } else {
     login.value = "";
     password.value = "";
     alert('Ошибка входа')
   }
 })
+
+//хеадер
+function headerCreate() {
+  const header = document.createElement('header');
+  header.classList.add("site-header");
+  product.before(header);
+
+  const navMenu = document.createElement('div');
+  navMenu.classList.add("menu");
+  header.appendChild(navMenu);
+  
+  const menuProducts = document.createElement('button');
+  menuProducts.classList.add("menu-item");
+  menuProducts.textContent = "Каталог";
+  navMenu.appendChild(menuProducts);
+
+  const menuClients = document.createElement('button');
+  menuClients.classList.add("menu-item");
+  menuClients.textContent = "Клиенты";
+  navMenu.appendChild(menuClients);
+
+  const menuOrders = document.createElement('button');
+  menuOrders.classList.add("menu-item");
+  menuOrders.textContent = "Заказы";
+  navMenu.appendChild(menuOrders);
+
+  const exitBtn = document.createElement("button");
+  exitBtn.type = "button";
+  exitBtn.classList.add("exit");
+  exitBtn.textContent = "Выход";
+  exitBtn.addEventListener('click', () => {
+    location.reload()
+  })
+  header.appendChild(exitBtn);
+}
 
 //активация попапа
 
@@ -70,6 +108,8 @@ function showItem() {
 
   product.replaceChildren();
 
+  //над товарами
+
   const productHeader = document.createElement("div");
   productHeader.classList.add("product-header");
   product.appendChild(productHeader);
@@ -93,17 +133,8 @@ function showItem() {
   })
   productHeader.appendChild(productBtn);
 
-//кнопка выход
+//создание товара
 
-  const exitBtn = document.createElement("button");
-  exitBtn.type = "button";
-  exitBtn.classList.add("exit");
-  exitBtn.textContent = "Выход";
-  exitBtn.addEventListener('click', () => {
-    location.reload()
-  })
-  productHeader.appendChild(exitBtn);
-  
   productLocal.forEach((item, index) => {
     const productId = document.createElement("div");
     productId.classList.add("product-item");
