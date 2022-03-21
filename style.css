@@ -8,7 +8,7 @@
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
     background-color: #e7e7e7;
     color: #000000;
 }
@@ -21,11 +21,53 @@ button {
     background: none;
 }
 
-.container {
-    height: 100vh;
+#panel {
+    background: #009688;
+    display: flex;
+    flex-direction: column;
+    width: 420px;
+    padding: 70px 40px;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.site-header {
+.panel-header {
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.panel-login-input {
+    height: 40px;
+    margin-bottom: 20px;
+    background: #fff;
+    padding: 0px 10px;
+}
+
+.panel-password-input {
+    height: 40px;
+    margin-bottom: 20px;
+    background: #fff;
+    padding: 0px 10px;
+}
+
+.panel-login-btn {
+    background: #fff;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-right: auto;
+}
+
+.panel-login-btn:hover {
+    background: #e7e7e7;
+}
+
+.header {
     background: #009688;
     padding: 0 20px;
     display: flex;
@@ -34,11 +76,11 @@ button {
     align-items: center;
 }
 
-.menu {
+.header-menu {
     display: flex;
 }
 
-.menu-item {
+.header-menu-item {
     margin-right: 30px;
     color: #fff;
     text-decoration: none;
@@ -49,11 +91,9 @@ button {
 }
 
 .exit {
-    height: 40px;
     background: #000;
     color: #fff;
-    width: 100px;
-    padding: 10px;
+    padding: 12px 20px;
     cursor: pointer;
     transition: 0.2s;
     margin-left: auto;
@@ -61,7 +101,24 @@ button {
 
 .exit:hover {
     background: #303030;
+}
+
+.content-header {
+    display: flex;
+    margin: 20px;
+}
+
+.add-product-button {
+    background: #009688;
     color: #fff;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-left: auto;
+}
+
+.add-product-button:hover {
+    background: #00766b;
 }
 
 .popup-bg {
@@ -81,66 +138,8 @@ button {
     transition: 0.5s all;
 }
 
-.popup {
-    display: flex;
-    flex-flow: column;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    width: 400px;
-    padding: 25px;
-    transition: 0.5s all;
-}
-
-.popup-bg.active {
-    transition: 0.5s all;
-}
-
-.productName {
-    margin: 20px 0px;
-    height: 40px;
-    padding: 0px 10px;
-    background: #e7e7e7;
-}
-
-.productPrice {
-    margin-bottom: 20px;
-    height: 40px;
-    padding: 0px 10px;
-    background: #e7e7e7;
-}
-
-.product-add {
-    height: 40px;
-    background: #009688;
-    color: #fff;
-    width: 100px;
-    padding: 10px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.product-add:hover {
-    background: #00766b;
-    color: #fff;
-}
-
-.close-popup {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    appearance: none;
-    border: none;
-    outline: none;
-    background: none;
-    font-family: 'Fredoka', sans-serif;
-}
-
-.panel-login {
-    background: #009688;
+.popup-panel {
+    background: #fff;
     display: flex;
     flex-direction: column;
     width: 420px;
@@ -152,51 +151,50 @@ button {
     transform: translate(-50%, -50%);
 }
 
-.login-input {
-    height: 40px;
-    margin-bottom: 20px;
-    background: #fff;
-    padding: 0px 10px;
+.popup-panel-header {
+    color: #009688;
+    font-size: 40px;
+    font-weight: 700;
 }
 
-.password-input {
-    height: 40px;
-    margin-bottom: 20px;
-    background: #fff;
-    padding: 0px 10px;
-}
-
-.login-button {
-    background: #fff;
-    height: 40px;
-    padding: 0px 10px;
+.popup-close-button {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    font-size: 40px;
     cursor: pointer;
-    transition: 0.2s;
-    width: 25%;
-    margin: 0 auto;
+    transition: 0.1s;
 }
 
-.login-button:hover {
+.popup-close-button:hover {
+    color: #009688;
+}
+
+.popup-product-name {
+    margin: 20px 0px;
+    height: 40px;
+    padding: 0px 10px;
     background: #e7e7e7;
 }
 
-.add-product-button {
+.popup-product-price {
+    margin-bottom: 20px;
+    height: 40px;
+    padding: 0px 10px;
+    background: #e7e7e7;
+}
+
+.popup-product-add-button {
     background: #009688;
     color: #fff;
-    height: 40px;
-    padding: 0 10px;
+    padding: 12px 20px;
     cursor: pointer;
     transition: 0.2s;
-    margin-left: auto;
+    margin-right: auto;
 }
 
-.add-product-button:hover {
+.popup-product-add-button:hover {
     background: #00766b;
-}
-
-.product-header {
-    display: flex;
-    margin: 20px 20px 0 20px;
 }
 
 .product-items {
@@ -207,11 +205,7 @@ button {
 .product-item {
     display: flex;
     background: #fff;
-    margin: 20px 20px 0px 20px;
-}
-
-.product-item:last-child {
-    margin-bottom: 20px;
+    margin: 0px 20px 20px 20px;
 }
 
 .product-name {
@@ -237,19 +231,16 @@ button {
     padding: 20px;
 }
 
-.product-delete-btn {
+.product-delete-button {
+    background: #fff;
+    color: #000;
+    padding: 12px 20px;
+    transition: 0.2s;
+    cursor: pointer;
     margin-left: auto;
 }
 
-.product-delete-btn {
-    background: #fff;
-    color: #000;
-    cursor: pointer;
-    transition: 0.2s;
-    padding: 0 20px;
-}
-
-.product-delete-btn:hover {
+.product-delete-button:hover {
     background: #009688;
     color: #fff;
 }

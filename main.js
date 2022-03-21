@@ -1,179 +1,210 @@
-///логин
-const panelLogin = document.querySelector(".panel-login");
-const login = document.getElementById("login-input");
-const password = document.getElementById("password-input");
-const button = document.getElementById("login-btn");
-//конент
-const product = document.getElementById("product");
-//popup
+const headers = document.getElementById("headers");
+const headline = document.getElementById("headline");
+const products = document.getElementById("products");
+
 const popupBg = document.querySelector(".popup-bg");
-const popup = document.querySelector(".popup");
-const popupClose = document.querySelector(".close-popup");
-const productName = document.getElementById("productName");
-const productPrice = document.getElementById("productPrice");
-const productAdd = document.getElementById("product-add");
+const popupPanel = document.querySelector(".popup-panel");
+
+const popupCloseButton = document.querySelector(".popup-close-button");
+const popupProductName = document.querySelector(".popup-product-name");
+const popupProductPrice = document.querySelector(".popup-product-price");
+const popupAddButton = document.querySelector(".popup-product-add-button");
 
 let productLocal = [];
 
-//авторизация
+panel();
 
-button.addEventListener("click", function () {
-  if (login.value == '1' && password.value == '1') {
-    panelLogin.remove();
-    showItem();
-    headerCreate();
-  } else {
-    login.value = "";
-    password.value = "";
-    alert('Ошибка входа')
-  }
-})
+//панель логина
+
+function panel() {
+  const panel = document.createElement("div");
+  panel.id = "panel";
+  headers.appendChild(panel);
+
+  const panelHeader = document.createElement("div");
+  panelHeader.classList.add("panel-header");
+  panelHeader.textContent = "Products"
+  panel.appendChild(panelHeader);
+
+  const panelLoginInput = document.createElement("input");
+  panelLoginInput.type = "text";
+  panelLoginInput.id = "panel-login-input";
+  panelLoginInput.classList.add("panel-login-input");
+  panelLoginInput.placeholder = "Логин";
+  panel.appendChild(panelLoginInput);
+
+  const panelPasswordInput = document.createElement("input");
+  panelPasswordInput.type = "password";
+  panelPasswordInput.id = "panel-password-input";
+  panelPasswordInput.classList.add("panel-password-input");
+  panelPasswordInput.placeholder = "Пароль";
+  panel.appendChild(panelPasswordInput);
+
+  const panelLoginButton = document.createElement("button");
+  panelLoginButton.type = "button";
+  panelLoginButton.id = "panel-login-btn";
+  panelLoginButton.classList.add("panel-login-btn");
+  panelLoginButton.textContent = "Войти";
+  panel.appendChild(panelLoginButton);
+
+  //авторизация
+
+  panelLoginButton.addEventListener("click", function () {
+    if (panelLoginInput.value == '1' && panelPasswordInput.value == '1') {
+      panel.remove();
+      header();
+      contentHeader();
+      contentProducts();
+      console.log('Успех');
+    } else {
+      panelLoginInput.value = "";
+      panelPasswordInput.value = "";
+      alert('Ошибка входа');
+    }
+  })
+}
 
 //хеадер
-function headerCreate() {
+
+function header() {
   const header = document.createElement('header');
-  header.classList.add("site-header");
-  product.before(header);
+  header.classList.add("header");
+  header.id = "header";
+  headers.appendChild(header);
 
   const navMenu = document.createElement('div');
-  navMenu.classList.add("menu");
+  navMenu.classList.add("header-menu");
   header.appendChild(navMenu);
-  
+
   const menuProducts = document.createElement('button');
-  menuProducts.classList.add("menu-item");
+  menuProducts.classList.add("header-menu-item");
   menuProducts.textContent = "Каталог";
   navMenu.appendChild(menuProducts);
 
   const menuClients = document.createElement('button');
-  menuClients.classList.add("menu-item");
+  menuClients.classList.add("header-menu-item");
   menuClients.textContent = "Клиенты";
   navMenu.appendChild(menuClients);
 
   const menuOrders = document.createElement('button');
-  menuOrders.classList.add("menu-item");
+  menuOrders.classList.add("header-menu-item");
   menuOrders.textContent = "Заказы";
   navMenu.appendChild(menuOrders);
 
-  const exitBtn = document.createElement("button");
-  exitBtn.type = "button";
-  exitBtn.classList.add("exit");
-  exitBtn.textContent = "Выход";
-  exitBtn.addEventListener('click', () => {
+  const exitButton = document.createElement("button");
+  exitButton.type = "button";
+  exitButton.classList.add("exit");
+  exitButton.textContent = "Выход";
+  exitButton.addEventListener('click', () => {
     location.reload()
   })
-  header.appendChild(exitBtn);
+  header.appendChild(exitButton);
 }
 
-//активация попапа
+//заголовок продуктов и кнопка добавить
 
-function openPopup() {
-  popupBg.classList.add('active');
-  popup.classList.add('active');
-}
+function contentHeader() {
+  const contentHeader = document.createElement("div");
+  contentHeader.classList.add("content-header");
+  headline.appendChild(contentHeader);
 
-//деактивация попапа
+  const productsTitle = document.createElement("h1");
+  productsTitle.classList.add("products-title");
+  productsTitle.type = "text";
+  productsTitle.textContent = 'Список товаров';
+  contentHeader.appendChild(productsTitle);
 
-popupClose.addEventListener('click', () => {
-  popupBg.classList.remove('active');
-  popup.classList.remove('active');
-})
-
-//добавление товара
-
-productAdd.addEventListener('click', () => {
-  if (productName.value && productPrice.value != 0) {
-    let localItems = JSON.parse(localStorage.getItem("localItem"));
-    if (localItems === null) {
-      productLocal = [];
-    } else {
-      productLocal = localItems;
-    }
-    productLocal.push([productName.value, productPrice.value]);
-    localStorage.setItem("localItem", JSON.stringify(productLocal));
-    productName.value = "";
-    productPrice.value = "";
-  }
-  showItem();
-})
-
-//вывод товаров
-
-function showItem() {
-  let localItems = JSON.parse(localStorage.getItem("localItem"));
-  if (localItems === null) {
-    productLocal = [];
-  } else {
-    productLocal = localItems;
-  }
-
-  product.replaceChildren();
-
-  //над товарами
-
-  const productHeader = document.createElement("div");
-  productHeader.classList.add("product-header");
-  product.appendChild(productHeader);
-
-//список товаров
-
-  const productTitle = document.createElement("h1");
-  productTitle.classList.add("product-title");
-  productTitle.type = "text";
-  productTitle.textContent = 'Список товаров';
-  productHeader.appendChild(productTitle);
-
-//кнопка добавить товар
-
-  const productBtn = document.createElement("button");
-  productBtn.type = "button";
-  productBtn.classList.add("add-product-button");
-  productBtn.textContent = "Добавить товар";
-  productBtn.addEventListener('click', () => {
+  const addProductButton = document.createElement("button");
+  addProductButton.type = "button";
+  addProductButton.classList.add("add-product-button");
+  addProductButton.textContent = "Добавить товар";
+  addProductButton.addEventListener('click', () => {
     openPopup();
   })
-  productHeader.appendChild(productBtn);
+  contentHeader.appendChild(addProductButton);
+}
 
-//создание товара
+function contentProducts() {
+  let localProducts = JSON.parse(localStorage.getItem("localProduct"));
+  if (localProducts === null) {
+    productLocal = [];
+  } else {
+    productLocal = localProducts;
+  }
+
+  products.replaceChildren();
 
   productLocal.forEach((item, index) => {
     const productId = document.createElement("div");
     productId.classList.add("product-item");
-    product.appendChild(productId);
+    products.appendChild(productId);
 
     const productInfo = document.createElement("div");
     productInfo.classList.add("product-info");
     productId.appendChild(productInfo);
 
-    const productItems = document.createElement("div");
-    productItems.classList.add("product-name");
-    productItems.type = "text";
-    productItems.value = item;
-    productItems.innerHTML = item[0];
-    productInfo.appendChild(productItems);
-    
+    const productItem = document.createElement("div");
+    productItem.classList.add("product-name");
+    productItem.type = "text";
+    productItem.value = item;
+    productItem.innerHTML = item[0];
+    productInfo.appendChild(productItem);
+
     const productPrice = document.createElement("div");
     productPrice.classList.add("product-price");
     productPrice.type = "number";
     productPrice.value = item;
-    productPrice.innerHTML = item[1] + ' ₽';
+    productPrice.innerHTML = item[1] + " ₽";
     productInfo.appendChild(productPrice);
 
-    const deleteBtn = document.createElement("button");
-    deleteBtn.type = "button";
-    deleteBtn.classList.add("product-delete-btn");
-    deleteBtn.textContent = "Удалить";
-    deleteBtn.addEventListener("click", () => {
-      deleteItem(index);
+    const productDeleteButton = document.createElement("button");
+    productDeleteButton.type = "button";
+    productDeleteButton.classList.add("product-delete-button");
+    productDeleteButton.textContent = "Удалить";
+    productDeleteButton.addEventListener("click", () => {
+      deleteProduct(index);
     });
-    productId.appendChild(deleteBtn);
+    productId.appendChild(productDeleteButton);
   });
 }
 
+//активация попапа
+
+function openPopup() {
+  popupBg.classList.add("active");
+  popupPanel.classList.add("active");
+}
+
+//деактивация попапа
+
+popupCloseButton.addEventListener("click", () => {
+  popupBg.classList.remove("active");
+  popupPanel.classList.remove("active");
+});
+
+//добавление товара
+
+popupAddButton.addEventListener("click", () => {
+  if (popupProductName.value && popupProductPrice.value != 0) {
+    let localProducts = JSON.parse(localStorage.getItem("localProduct"));
+    if (localProducts === null) {
+      productLocal = [];
+    } else {
+      productLocal = localProducts;
+    }
+    productLocal.push([popupProductName.value, popupProductPrice.value]);
+    localStorage.setItem("localProduct", JSON.stringify(productLocal));
+    popupProductName.value = "";
+    popupProductPrice.value = "";
+  }
+  contentProducts();
+});
+
 //удаление товара
 
-function deleteItem(index) {
-  let localItems = JSON.parse(localStorage.getItem("localItem"));
+function deleteProduct(index) {
+  let localProducts = JSON.parse(localStorage.getItem("localProduct"));
   productLocal.splice(index, 1);
-  localStorage.setItem("localItem", JSON.stringify(productLocal));
-  showItem();
+  localStorage.setItem("localProduct", JSON.stringify(productLocal));
+  contentProducts();
 }
