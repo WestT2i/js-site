@@ -1,5 +1,3 @@
-const headers = document.getElementById("headers");
-const headline = document.getElementById("headline");
 const products = document.getElementById("products");
 
 const popupBg = document.querySelector(".popup-bg");
@@ -19,7 +17,7 @@ panel();
 function panel() {
   const panel = document.createElement("div");
   panel.id = "panel";
-  headers.appendChild(panel);
+  products.appendChild(panel);
 
   const panelHeader = document.createElement("div");
   panelHeader.classList.add("panel-header");
@@ -70,7 +68,7 @@ function header() {
   const header = document.createElement('header');
   header.classList.add("header");
   header.id = "header";
-  headers.appendChild(header);
+  products.appendChild(header);
 
   const navMenu = document.createElement('div');
   navMenu.classList.add("header-menu");
@@ -106,7 +104,7 @@ function header() {
 function contentHeader() {
   const contentHeader = document.createElement("div");
   contentHeader.classList.add("content-header");
-  headline.appendChild(contentHeader);
+  products.appendChild(contentHeader);
 
   const productsTitle = document.createElement("h1");
   productsTitle.classList.add("products-title");
@@ -124,6 +122,8 @@ function contentHeader() {
   contentHeader.appendChild(addProductButton);
 }
 
+//вывод товаров
+
 function contentProducts() {
   let localProducts = JSON.parse(localStorage.getItem("localProduct"));
   if (localProducts === null) {
@@ -133,16 +133,22 @@ function contentProducts() {
   }
 
   products.replaceChildren();
+  header();
+  contentHeader();
+
+  const contentProducts = document.createElement("div");
+  contentProducts.classList.add("content-products");
+  products.appendChild(contentProducts);
 
   productLocal.forEach((item, index) => {
-    const productId = document.createElement("div");
-    productId.classList.add("product-item");
-    products.appendChild(productId);
-
+    const productItems = document.createElement("div");
+    productItems.classList.add("product-item");
+    contentProducts.appendChild(productItems);
+  
     const productInfo = document.createElement("div");
     productInfo.classList.add("product-info");
-    productId.appendChild(productInfo);
-
+    productItems.appendChild(productInfo);
+    
     const productItem = document.createElement("div");
     productItem.classList.add("product-name");
     productItem.type = "text";
@@ -164,7 +170,7 @@ function contentProducts() {
     productDeleteButton.addEventListener("click", () => {
       deleteProduct(index);
     });
-    productId.appendChild(productDeleteButton);
+    productItems.appendChild(productDeleteButton);
   });
 }
 

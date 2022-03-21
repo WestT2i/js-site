@@ -197,15 +197,20 @@ button {
     background: #00766b;
 }
 
-.product-items {
+.content-products {
     display: flex;
-    flex-direction: column;
+    flex-flow: column;
+    margin: 20px;
 }
 
 .product-item {
     display: flex;
     background: #fff;
-    margin: 0px 20px 20px 20px;
+    margin-bottom: 20px;
+}
+
+.product-item:last-child {
+    margin-bottom: 0;
 }
 
 .product-name {
